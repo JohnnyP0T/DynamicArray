@@ -4,16 +4,18 @@
 using namespace std;
 class DynamicArray
 {
-	int* _array = new int[capacity];
+	int* _array;
 	int _growthFactor = 2;
 	int GetElement();
-	void IncreaseArray(int*& array);
+	void IncreaseArray();
+	int _length = 0;
+	int _capacity = 4;
 public:
-	int length = 0;
-	int capacity = 4;
 	
-	void CreatArray();
-	
+	DynamicArray();
+	int& operator[](int index);
+	int GetLenght();
+	int GetCapacity();
 	void AddElement();
 	int InsertElement(int j);
 	void ShowArray();
@@ -30,5 +32,6 @@ public:
 
 	bool SortCheck();
 
+	~DynamicArray();
 };
 
