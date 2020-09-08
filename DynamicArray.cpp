@@ -25,7 +25,6 @@ int& DynamicArray::operator[](int index)
         exit(1);
     }
     return _array[index];
-    // TODO: вставьте здесь оператор return
 }
 
 void DynamicArray::AddElement()
