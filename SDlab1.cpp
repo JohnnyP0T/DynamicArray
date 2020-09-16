@@ -15,61 +15,57 @@ int main()
 			dynamicArray.ShowArray();
 		}
 		cout << "+=================== Dynamic Array ===================+" << endl;
-		cout << "Lenght = " << dynamicArray.GetLenght() << " Capacity = " << dynamicArray.GetCapacity() << endl;
+		cout << "Lenght = " << dynamicArray.GetLenght() << " Capacity = ";
+		cout << dynamicArray.GetCapacity() << endl;
 
-		cout << "1 - Show array | 2 - Add Element | 3 - Insert Element | 4 - Remove Element" << endl;
-		cout << "5 - Line search | 6 - Binary search | 7 - Quick Sort | 8 - Exit | 9 - zakrep" << endl;
+		cout << "1 - Add Element |";
+		cout << " 2 - Insert Element | 3 - Remove Element" << endl;
+		cout << "4 - Line search | 5 - Binary search |"; 
+		cout << " 6 - Quick Sort | 7 - Show array \n=++= ";
+		cout << " any other button - Exit  =++=" << endl;
 		
 		cin >> count;
 		switch (count)
 		{
 		case 1:
-			dynamicArray.ShowArray();
-			cout << "Wait..." << endl;
-			Sleep(3000);
-			break;
-		case 2:
 			dynamicArray.AddElement();
 			break;
-		case 3:
+		case 2:
 			cout << "Enter index: ";
 			cin >> value;
 			cout << endl;
 			dynamicArray.InsertElement(value);
 			Sleep(1000);
 			break;
-		case 4:
+		case 3:
 			cout << "Enter index: ";
 			cin >> value;
 			cout << endl;
 			dynamicArray.RemoveElement(value);
 			Sleep(1000);
 			break;
-		case 5:
+		case 4:
 			cout << "Enter value: ";
 			cin >> value;
 			cout << endl;
 			dynamicArray.LinearSearch(value);
 			Sleep(1500);
 			break;
-		case 6:
+		case 5:
 			cout << "Enter value: ";
 			cin >> value;
 			cout << endl;
 			dynamicArray.BinarySearch(value);
 			Sleep(1500);
 			break;
-		case 7: 
+		case 6: 
 			dynamicArray.QuickSort();
 			break;
-		case 8: 
-			exit(0);
-			break;
-		case 9:
+		case 7: 
 			value2 = 9;
 			break;
 		default:
-			cout << "unexpected error" << endl;
+			return 0;
 			break;
 		}
 		system("cls");

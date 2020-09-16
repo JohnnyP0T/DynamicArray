@@ -9,45 +9,35 @@ class DynamicArray
 	int _growthFactor = 2;
 	int _length = 0;
 	int _capacity = 4;
-
+	/// Получение элемента с консоли и проверка на int
 	int GetElement();
 
-	//увеличение массива
 	void IncreaseArray();
 	
 public:
-	//конструктор
+
 	DynamicArray();
 
-	//перегрузка оператора индексирования
-	//(в данной задаче не пригодилось)
+
 	int& operator[](int index);
 
-	//получение переменных массива 
-	//(нет сетеров  потому что пользователю их менять не надо)
 	int GetLenght();
 	int GetCapacity();
 
-	//добавление элемента
 	void AddElement();
 
-	//вставка элемента
-	int InsertElement(int j);
+	int InsertElement(int index);
 
-	//вывод массива
 	void ShowArray();
 
-	//удаление элемента
-	int RemoveElement(int j);
+	int RemoveElement(int index);
 
-	//быстрая сортировка
 	void QuickSort();
-
+	
 	int LinearSearch(int value);
 	int BinarySearch(int value);
-	void ShowElement(int i);
+	void ShowElement(int index);
 	
-	//проверка для бинарного поиска
 	bool SortCheck();
 
 

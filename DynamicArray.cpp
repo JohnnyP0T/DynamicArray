@@ -40,7 +40,7 @@ void DynamicArray::AddElement()
     
 }
 
-int DynamicArray::InsertElement(int j)
+int DynamicArray::InsertElement(int index)
 {
     int element;
     int buf = 0;
@@ -49,14 +49,14 @@ int DynamicArray::InsertElement(int j)
     {
         IncreaseArray();
     }
-    if (j > _length)
+    if (index > _length)
     {
         cout << "index does not exist" << endl;
         return 1;
     }
-    buf = _array[j];
-    _array[j] = element;
-    for (int i = j + 1; i <= _length; i++)
+    buf = _array[index];
+    _array[index] = element;
+    for (int i = index + 1; i <= _length; i++)
     {
         element = _array[i];
         _array[i] = buf;
@@ -77,7 +77,7 @@ void DynamicArray::ShowArray()
     cout << endl;
 }
 
-int DynamicArray::RemoveElement(int j)
+int DynamicArray::RemoveElement(int index)
 {
     int buf = 0;
     if (_length == 0)
@@ -86,13 +86,13 @@ int DynamicArray::RemoveElement(int j)
         return 1;
     }
 
-    if (j >= _length)
+    if (index >= _length)
     {
         cout << "index does not exist" << endl;
         return 1;
     }
 
-    for (int i = j + 1; i < _length; i++)
+    for (int i = index + 1; i < _length; i++)
     {
         _array[i - 1] = _array[i];
     }
@@ -203,9 +203,9 @@ int DynamicArray::BinarySearch(int value)
     return 1;
 }
 
-void DynamicArray::ShowElement(int i)
+void DynamicArray::ShowElement(int index)
 {
-    cout << "index: " << i << " element: " << _array[i] << endl;
+    cout << "index: " << index << " element: " << _array[index] << endl;
 }
 
 bool DynamicArray::SortCheck()
@@ -235,22 +235,21 @@ DynamicArray::~DynamicArray()
 
 int DynamicArray::GetElement()
 {
-    while (true) // цикл продолжается до тех пор, пока пользователь не введет корректное значение
+    while (true) 
     {
         cout << "Enter a int value: ";
         int a;
         cin >> a;
 
-        // Проверка на предыдущее извлечение
-        if (cin.fail()) // если предыдущее извлечение оказалось неудачным,
+        if (cin.fail()) 
         {
-            cin.clear(); // то возвращаем cin в 'обычный' режим работы
-            cin.ignore(32767, '\n'); // и удаляем значения предыдущего ввода из входного буфера
+            cin.clear(); 
+            cin.ignore(32767, '\n'); 
             cout << "Oops, that input is invalid.  Please try again.\n";
         }
         else
         {
-            cin.ignore(32767, '\n'); // удаляем лишние значения
+            cin.ignore(32767, '\n');
 
             return a;
         }
