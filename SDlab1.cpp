@@ -1,16 +1,22 @@
 ﻿#include <iostream>
-#include"DynamicArray.h";
 #include <stdlib.h>
+
 #include "windows.h"
+
+#include"DynamicArray.h";
+
+
 using namespace std;
+
+
 int main()
 {
 	DynamicArray dynamicArray;
 	int count = 0;
-	int value = 0;
-	int value2 = 0;
+	int valueForManu = 0;
+	int value2ForManu = 0;
 	for (;;) {
-		if (value2 == 9)
+		if (value2ForManu == 9)
 		{
 			dynamicArray.ShowArray();
 		}
@@ -21,48 +27,55 @@ int main()
 		cout << "1 - Add Element |";
 		cout << " 2 - Insert Element | 3 - Remove Element" << endl;
 		cout << "4 - Line search | 5 - Binary search |"; 
-		cout << " 6 - Quick Sort | 7 - Show array \n=++= ";
+		cout << " 6 - Sort | 7 - Show array \n=++= ";
 		cout << " any other button - Exit  =++=" << endl;
 		
 		cin >> count;
 		switch (count)
 		{
 		case 1:
+			cout << "Enter a integer value: ";
 			dynamicArray.AddElement();
+			cout << endl;
 			break;
 		case 2:
 			cout << "Enter index: ";
-			cin >> value;
+			valueForManu = dynamicArray.GetElementConsole();
 			cout << endl;
-			dynamicArray.InsertElement(value);
-			Sleep(1000);
+			cout << "Value: ";
+			dynamicArray.InsertElement(valueForManu);
+			cout << endl;
 			break;
 		case 3:
 			cout << "Enter index: ";
-			cin >> value;
+			valueForManu = dynamicArray.GetElementConsole();
 			cout << endl;
-			dynamicArray.RemoveElement(value);
-			Sleep(1000);
+			dynamicArray.RemoveElement(valueForManu);
+			cout << endl;
 			break;
 		case 4:
 			cout << "Enter value: ";
-			cin >> value;
+			valueForManu = dynamicArray.GetElementConsole();
 			cout << endl;
-			dynamicArray.LinearSearch(value);
-			Sleep(1500);
+			dynamicArray.LinearSearch(valueForManu);
+			cout << endl;
+			cout << "Enter integer for next \n";
+			valueForManu = dynamicArray.GetElementConsole();
 			break;
 		case 5:
 			cout << "Enter value: ";
-			cin >> value;
+			valueForManu = dynamicArray.GetElementConsole();
 			cout << endl;
-			dynamicArray.BinarySearch(value);
-			Sleep(1500);
+			dynamicArray.BinarySearch(valueForManu);
+			cout << endl;
+			cout << "Enter integer for next \n";
+			valueForManu = dynamicArray.GetElementConsole();
 			break;
 		case 6: 
-			dynamicArray.QuickSort();
+			dynamicArray.BubbleSort();
 			break;
 		case 7: 
-			value2 = 9;
+			value2ForManu = 9;
 			break;
 		default:
 			return 0;
