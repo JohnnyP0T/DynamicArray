@@ -1,13 +1,15 @@
+#include <iostream>
+
 #include "DynamicArray.h"
 
 
-int DynamicArray::GetLenght()
+int DynamicArray::GetLength() const
 {
     return _length;
 }
 
 
-int DynamicArray::GetCapacity()
+int DynamicArray::GetCapacity() const
 {
     return _capacity;
 }
@@ -19,48 +21,32 @@ DynamicArray::DynamicArray()
 }
 
 
-int& DynamicArray::operator[](int index)
+void DynamicArray::AddElement(const int element)
 {
-    if (index < 0)
-    {
-        cout << "Index does not exist" << endl;
-        exit(1);
-    }
-    if (index >= _length)
-    {
-        cout << "Index does not exist" << endl;
-        exit(1);
-    }
-    return _array[index];
-}
-
-void DynamicArray::AddElement()
-{
-    int element;
-    element = GetElementConsole();
     if (_length >= _capacity)
     {
         IncreaseArray();
     }
+	
     _array[_length] = element;
     _length++;
-    
 }
 
-int DynamicArray::InsertElement(int index)
+	
+void DynamicArray::InsertElement(int element, const int index)
 {
-    int element;
     int buf = 0;
-    element = GetElementConsole();
+	
     if (_length >= _capacity)
     {
         IncreaseArray();
     }
+	
     if (index > _length || index < 0)
     {
-        cout << "index does not exist" << endl;
-        return 1;
+        return;
     }
+	
     buf = _array[index];
     _array[index] = element;
     for (int i = index + 1; i <= _length; i++)
@@ -69,60 +55,48 @@ int DynamicArray::InsertElement(int index)
         _array[i] = buf;
         buf = element;
     }
+	
     _length++;
-    return 0;
 }
 
 
-void DynamicArray::ShowArray()
-{
-    cout << "array: ";
-    for (int i = 0; i < _length; i++) 
-    {
-        cout << _array[i] << ' ';
-    }
-    cout << endl;
-}
-
-
-int DynamicArray::RemoveElement(int index)
+void DynamicArray::RemoveElement(const int index)
 {
     int buf = 0;
     if (_length == 0)
     {
-        cout << "array is empty" << endl;
-        return 1;
+        return;
     }
 
     if (index >= _length || index < 0)
     {
-        cout << "index does not exist" << endl;
-        return 1;
+        return;
     }
 
     for (int i = index + 1; i < _length; i++)
     {
         _array[i - 1] = _array[i];
     }
+	
     _length -= 1;
     if (_length > 1 && (_capacity / _length) >= 2)
     {
         DecreaseArray();
     }
-    return 0;
+	
+    return;
 }
 
 
-void DynamicArray::BubbleSort()
+void DynamicArray::BubbleSort() const
 {
-    int tmp;
-    for (int i = 1; i < _length; i++)
+	for (int i = 1; i < _length; i++)
     {
         for (int j = 1; j < _length; j++)
         {
             if (_array[j - 1] > _array[j])
             {
-                tmp = _array[j - 1];
+                const int tmp = _array[j - 1];
                 _array[j - 1] = _array[j];
                 _array[j] = tmp;
             }
@@ -131,24 +105,26 @@ void DynamicArray::BubbleSort()
 }
 
 
-void DynamicArray::LinearSearch(int value)
+int DynamicArray::LinearSearch(const int value) const
 {
     int count = 0;
     for (int i = 0; i < _length; i++)
     {
         if (value == _array[i])
         {
-            ShowElement(i);
             count++;
+            return i;
         }
     }
-    if (count == 0)
-    {
-        cout << "Not found" << endl;
-    }
+	
+	if(!count)
+	{
+        return -1;
+	}
 }
 
-int DynamicArray::BinarySearch(int value)
+
+int DynamicArray::BinarySearch(const int value) const
 {
     if (!SortCheck())
     {
@@ -158,13 +134,12 @@ int DynamicArray::BinarySearch(int value)
     int high = _length - 1;
     while (low <= high)
     {
-        int mid = (low + high) / 2;
+	    const int mid = (low + high) / 2;
         if (value == _array[mid])
         {
-            ShowElement(mid);
-            return 0;
+            return mid;
         }
-        else if (value > _array[mid])
+        if (value > _array[mid])
         {
             low = mid + 1;
         }
@@ -173,16 +148,17 @@ int DynamicArray::BinarySearch(int value)
             high = mid - 1;
         }
     }
-    cout << "Not found" << endl;
-    return 1;
+    return -1;
 }
 
-void DynamicArray::ShowElement(int index)
+
+int DynamicArray::GetElement(const int index) const
 {
-    cout << "index: " << index << " element: " << _array[index] << endl;
+    return _array[index];
 }
 
-bool DynamicArray::SortCheck()
+
+bool DynamicArray::SortCheck() const
 {
     int count = 0;
     for (int i = 0; i < _length - 1; i++)
@@ -200,33 +176,12 @@ bool DynamicArray::SortCheck()
     return false; 
 }
 
+
 DynamicArray::~DynamicArray()
 {
     delete[] _array;
 }
 
-int DynamicArray::GetElementConsole()
-{
-    while (true) 
-    {
-        int value;
-        cin >> value;
-
-        if (cin.fail()) 
-        {
-            cin.clear(); 
-            cin.ignore(32767, '\n'); 
-            cout << "Oops, that input is invalid.  Please try again.\n";
-        }
-        else
-        {
-            cin.ignore(32767, '\n');
-
-            return value;
-        }
-    }
-    return 0;
-}
 
 void DynamicArray::IncreaseArray()
 {
@@ -240,13 +195,16 @@ void DynamicArray::IncreaseArray()
     _array = newArray;
 }
 
+
 void DynamicArray::DecreaseArray()
 {
     int* newArray = new int[_capacity / _growthFactor];
+	
     for (int i = 0; i < _length; i++)
     {
         newArray[i] = _array[i];
     }
+	
     _capacity /= _growthFactor;
     delete[] _array;
     _array = newArray;

@@ -1,7 +1,9 @@
 #pragma once
-#include<iostream>
+
 #include<stack>
+
 using namespace std;
+
 class DynamicArray
 {
 private:
@@ -13,28 +15,30 @@ private:
 	
 public:
 	void IncreaseArray();
-	int GetElementConsole();
+	
 	DynamicArray();
 
-	int& operator[](int index);
-
-	int GetLenght();
-	int GetCapacity();
-
-	void BubbleSort();
-	void AddElement();
-	void DecreaseArray();
-	int InsertElement(int index);
-
-	void ShowArray();
-
-	int RemoveElement(int index);
-
-	void LinearSearch(int value);
-	int BinarySearch(int value);
-	void ShowElement(int index);
+	int GetLength() const;
 	
-	bool SortCheck();
+	int GetCapacity() const;
+
+	void BubbleSort() const;
+	
+	void AddElement(int element);
+	
+	void DecreaseArray();
+	
+	void InsertElement(int element, int index);
+
+	void RemoveElement(int index);
+
+	int LinearSearch(int value) const;
+	
+	int BinarySearch(int value) const;
+	
+	int GetElement(int index) const;
+	
+	bool SortCheck() const;
 
 	~DynamicArray();
 };
