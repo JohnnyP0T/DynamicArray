@@ -1,3 +1,0 @@
-﻿  DynamicArray.cpp
-C:\Users\arrog\source\repos\SDlab1\SDlab1\DynamicArray.cpp(124): warning C4715: 'DynamicArray::LinearSearch': not all control paths return a value
-  SDlab1.vcxproj -> C:\Users\arrog\source\repos\SDlab1\SDlab1\Debug\SDlab1.exe
